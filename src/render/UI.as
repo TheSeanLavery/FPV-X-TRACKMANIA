@@ -35,8 +35,8 @@ void Render() {
     float bx = float(cfgOverlayX);
     float by = float(cfgOverlayY);
 
-    DrawStickWidget(bx, by, pad.LeftStickX,  pad.LeftStickY);
-    DrawStickWidget(bx + cfgOverlaySize + cfgOverlayGap, by, pad.RightStickX, pad.RightStickY);
+    DrawStickWidget(bx, by, ReadAxis(pad, cfgYawAxis),  ReadAxis(pad, cfgThrottleAxis));
+    DrawStickWidget(bx + cfgOverlaySize + cfgOverlayGap, by, ReadAxis(pad, cfgRollAxis), ReadAxis(pad, cfgPitchAxis));
 
 }
 

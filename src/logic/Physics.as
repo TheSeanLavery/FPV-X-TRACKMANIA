@@ -208,16 +208,16 @@ void UpdateFlightInputs(CGameControlCameraFree@ cam, CInputScriptPad@ pad, uint 
 }
 
 void UpdateThrottle(CInputScriptPad@ pad) {
-    float stickY = ApplyDeadzone(pad.LeftStickY);
+    float stickY = ReadThrottleAxis(pad);
     float stickThrottle = Math::Clamp((-stickY * (cfgInvThrottle ? -1.0f : 1.0f) + 1.0f) * 0.5f, 0.0f, 1.0f);
     float minimumThrottle = Math::Clamp(cfgMinThrottlePct / 100.0f, 0.0f, 0.95f);
     flightState.throttle = stickThrottle < 0.001f ? 0.0f : (minimumThrottle + (1.0f - minimumThrottle) * Math::Pow(stickThrottle, cfgThrottleCurve)) * cfgThrottleMax;
 }
 
 void UpdateAngularRates(CInputScriptPad@ pad, float dt) {
-    float yawInput = ApplyDeadzone(pad.LeftStickX) * (cfgInvYaw ? -1.0f : 1.0f);
-    float pitchInput = -ApplyDeadzone(pad.RightStickY) * (cfgInvPitch ? -1.0f : 1.0f);
-    float rollInput = ApplyDeadzone(pad.RightStickX) * (cfgInvRoll ? -1.0f : 1.0f);
+    float yawInput = ReadYawAxis(pad) * (cfgInvYaw ? -1.0f : 1.0f);
+    float pitchInput = -ReadPitchAxis(pad) * (cfgInvPitch ? -1.0f : 1.0f);
+    float rollInput = ReadRollAxis(pad) * (cfgInvRoll ? -1.0f : 1.0f);
 
     float inertiaBlend = 1.0f - Math::Pow(cfgAngInertia, dt * 60.0f);
     flightState.pitchRate += (pitchInput * cfgTiltRate - flightState.pitchRate) * inertiaBlend;

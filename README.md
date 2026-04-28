@@ -2,16 +2,33 @@
 
 ## Requirements
 
-* **Gamepad**: A controller is mandatory to pilot the drone (for now).
+* **Controller**: A gamepad or FPV drone controller is mandatory to pilot the drone.
 * **Camera 7**: The physics engine activates automatically when switching to camera 7.
+
+## Supported Controllers
+
+Any controller recognized as a USB gamepad/joystick will work. This includes standard gamepads and dedicated FPV drone controllers:
+
+| Controller | Connection | Notes |
+|---|---|---|
+| **Xbox / PlayStation / Generic gamepads** | USB or Bluetooth | Plug-and-play, detected automatically |
+| **DJI FPV Controller 2** | USB-C | Powers on automatically when connected, appears as a generic gamepad |
+| **DJI RC Pro** | USB-C | Same as DJI FPV Controller 2 |
+| **RadioMaster TX16S / Pocket / Zorro** | USB-C | Set the radio to **Joystick mode** in its system menu |
+| **TBS Tango 2 / Mambo** | USB-C | Appears as a standard HID joystick |
+| **FrSky / Jumper / other radios** | USB-C or sim dongle | Most modern radios have USB joystick mode; older radios need a USB simulator dongle |
+
+If your controller's stick axes don't match the default layout, open Settings → Axes and remap the axis source for Throttle, Yaw, Pitch, and Roll. Use the on-screen stick overlay to verify correct mapping.
+
+If you have multiple controllers connected, adjust the **Pad index** in Settings → Controller to select the right one.
 
 ## Controls
 
-The plugin uses the standard configuration by default:
+The plugin uses the standard FPV configuration by default:
 * **Left Stick**: Throttle (Y-axis) and Yaw (X-axis).
 * **Right Stick**: Pitch (Y-axis) and Roll (X-axis).
 
-*Note: All axes can be inverted and deadzones adjusted in the plugin settings.*
+*Note: All axes can be remapped, inverted, and deadzones/expo adjusted in the plugin settings.*
 
 ## Key Features
 
@@ -42,9 +59,8 @@ Access all settings via the Openplanet menu (`F3`)- > "Openplanet" button -> "Se
 ## To Do List
 - quaternion slerp
 - presets
-- support for true fpv controllers binding, as well as keyboard/mouse
 - LB/RB for camera angle adjustment
-- non-linear curves
+- keyboard/mouse support
 
 ## Discord server to suggest features and share your clips
 

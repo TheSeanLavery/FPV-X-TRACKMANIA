@@ -5,6 +5,15 @@ enum FlightMode {
     Rewinding,
 }
 
+enum AxisSource {
+    LeftX,
+    LeftY,
+    RightX,
+    RightY,
+    L2,
+    R2,
+}
+
 class ViewAngles {
     float yaw = 0.0f;
     float pitch = 0.0f;
