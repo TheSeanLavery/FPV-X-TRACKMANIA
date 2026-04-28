@@ -49,19 +49,37 @@ float cfgThrottleCurve = 2.0f;
 [Setting category="Physics" name="Minimum throttle (%)" min=0.0 max=30.0]
 float cfgMinThrottlePct = 0.0f;
 
+[Setting category="Controller" name="Pad index (0 = first gamepad found)" min=0 max=7]
+int cfgPadIndex = 0;
+
+[Setting category="Axes" name="Throttle axis source" description="Which stick axis to use for throttle"]
+AxisSource cfgThrottleAxis = AxisSource::LeftY;
+
+[Setting category="Axes" name="Yaw axis source" description="Which stick axis to use for yaw"]
+AxisSource cfgYawAxis = AxisSource::LeftX;
+
+[Setting category="Axes" name="Pitch axis source" description="Which stick axis to use for pitch"]
+AxisSource cfgPitchAxis = AxisSource::RightY;
+
+[Setting category="Axes" name="Roll axis source" description="Which stick axis to use for roll"]
+AxisSource cfgRollAxis = AxisSource::RightX;
+
 [Setting category="Axes" name="Stick deadzone" min=0.0 max=0.4]
 float cfgDeadzone = 0.0f;
 
-[Setting category="Axes" name="Invert Throttle (left stick Y)"]
+[Setting category="Axes" name="Stick expo (1=linear, 2-3=FPV feel)" min=1.0 max=5.0]
+float cfgStickExpo = 1.0f;
+
+[Setting category="Axes" name="Invert Throttle"]
 bool cfgInvThrottle = false;
 
-[Setting category="Axes" name="Invert Yaw (left stick X)"]
+[Setting category="Axes" name="Invert Yaw"]
 bool cfgInvYaw = false;
 
-[Setting category="Axes" name="Invert Pitch (right stick Y)"]
+[Setting category="Axes" name="Invert Pitch"]
 bool cfgInvPitch = false;
 
-[Setting category="Axes" name="Invert Roll (right stick X)"]
+[Setting category="Axes" name="Invert Roll"]
 bool cfgInvRoll = true;
 
 [Setting category="Axes" name="Invert visual roll"]

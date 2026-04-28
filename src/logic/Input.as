@@ -47,6 +47,40 @@ float ApplyDeadzone(float v) {
     return Math::Abs(v) < cfgDeadzone ? 0.0f : v;
 }
 
+float ApplyExpo(float v) {
+    if (cfgStickExpo <= 1.0f) return v;
+    float sign = v < 0.0f ? -1.0f : 1.0f;
+    return sign * Math::Pow(Math::Abs(v), cfgStickExpo);
+}
+
+float ReadAxis(CInputScriptPad@ pad, AxisSource src) {
+    switch (src) {
+        case AxisSource::LeftX:  return pad.LeftStickX;
+        case AxisSource::LeftY:  return pad.LeftStickY;
+        case AxisSource::RightX: return pad.RightStickX;
+        case AxisSource::RightY: return pad.RightStickY;
+        case AxisSource::L2:     return pad.L2;
+        case AxisSource::R2:     return pad.R2;
+    }
+    return 0.0f;
+}
+
+float ReadThrottleAxis(CInputScriptPad@ pad) {
+    return ApplyDeadzone(ReadAxis(pad, cfgThrottleAxis));
+}
+
+float ReadYawAxis(CInputScriptPad@ pad) {
+    return ApplyExpo(ApplyDeadzone(ReadAxis(pad, cfgYawAxis)));
+}
+
+float ReadPitchAxis(CInputScriptPad@ pad) {
+    return ApplyExpo(ApplyDeadzone(ReadAxis(pad, cfgPitchAxis)));
+}
+
+float ReadRollAxis(CInputScriptPad@ pad) {
+    return ApplyExpo(ApplyDeadzone(ReadAxis(pad, cfgRollAxis)));
+}
+
 //stored offsets
 uint16 offRotSpd = 0;
 uint16 offRotIn = 0;
@@ -81,16 +115,18 @@ uint16 LookupMemberOffset(const string &in cls, const string &in mem) {
     return Reflection::GetType(cls).GetMember(mem).Offset;
 }
 
-CInputScriptPad@ GetPrimaryPad() { //Only uses the first pad found (can be changed in a later update)
+CInputScriptPad@ GetPrimaryPad() {
     auto port = GetApp().InputPort;
 
     if (port is null) return null;
-    
+
+    int padsSeen = 0;
     for (uint i = 0; i < port.Script_Pads.Length; i++) {
         auto p = port.Script_Pads[i];
         if (p is null) continue;
         if (p.Type == CInputScriptPad::EPadType::Keyboard || p.Type == CInputScriptPad::EPadType::Mouse) continue;
-        return p;
+        if (padsSeen == cfgPadIndex) return p;
+        padsSeen++;
     }
     return null;
 }
