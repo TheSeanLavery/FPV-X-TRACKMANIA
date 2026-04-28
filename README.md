@@ -60,7 +60,6 @@ Access all settings via the Openplanet menu (`F3`)- > "Openplanet" button -> "Se
 - quaternion slerp
 - presets
 - LB/RB for camera angle adjustment
-- non-linear curves
 - keyboard/mouse support
 
 ## Discord server to suggest features and share your clips

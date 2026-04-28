@@ -67,7 +67,7 @@ AxisSource cfgRollAxis = AxisSource::RightX;
 [Setting category="Axes" name="Stick deadzone" min=0.0 max=0.4]
 float cfgDeadzone = 0.0f;
 
-[Setting category="Axes" name="Stick expo (1=linear, 2-3=FPV feel)" min=1.0 max=5.0]
+[Setting category="Axes" name="Stick expo (yaw/pitch/roll)" description="Exponential curve for yaw, pitch and roll axes. Higher values give finer control near center and faster response at edges. 1 = linear, 2-3 = typical FPV feel. Throttle uses its own curve in Physics settings." min=1.0 max=5.0]
 float cfgStickExpo = 1.0f;
 
 [Setting category="Axes" name="Invert Throttle"]
